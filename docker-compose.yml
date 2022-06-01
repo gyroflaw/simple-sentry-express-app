@@ -1,0 +1,21 @@
+version: "3"
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - mern-network
+    volumes:
+      - ./src:/usr/app/src
+
+    environment:
+      - MONGO_URL=mongodb://db:27017
+      - CLIENT=http://localhost:3000
+    command: yarn dev
+
+networks:
+  mern-network:
+    driver: bridge
